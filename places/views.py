@@ -14,7 +14,7 @@ def location_view(request, id):
     location = get_object_or_404(Location, id=id)
     response_data = {
         'title' : location.title,
-        'imgs' : [image.image.url for image in Image.objects.filter(location=location.id)],
+        'imgs' : [image.image.url for image in location.images.all()],
         'short_description' : location.short_description,
         'long_description' : location.long_description,
         'coordinates' : {

@@ -23,7 +23,8 @@ class Location(models.Model):
         
 class Image(models.Model):
     title = models.CharField(max_length=100, blank=True, verbose_name='Заголовок')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=0)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=0,
+                                related_name='images')
     image = models.ImageField(verbose_name='файл картинки')
     position = models.PositiveIntegerField(default=0, blank=False, null=False)
     
