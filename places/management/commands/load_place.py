@@ -11,10 +11,10 @@ class Command(BaseCommand):
         place = json.loads(requests.get(options['load_address']).content)
         new_location, created = Location.objects.get_or_create(
                             title=place['title'],
-                            description_short=place['description_short'],
-                            description_long=place['description_long'],
-                            coordinates_lng=place['coordinates']['lng'],
-                            coordinates_lat=place['coordinates']['lat'],
+                            short_description=place['description_short'],
+                            long_description=place['description_long'],
+                            lng_coordinate=place['coordinates']['lng'],
+                            lat_coordinate=place['coordinates']['lat'],
                             )
         if created:
             self.stdout.write(self.style.SUCCESS('{} created sucsessfully'.format(place['title'])))

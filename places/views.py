@@ -15,11 +15,11 @@ def location_view(request, id):
     response_data = {
         'title' : location.title,
         'imgs' : [image.image.url for image in Image.objects.filter(location=location.id)],
-        'description_short' : location.description_short,
-        'description_long' : location.description_long,
+        'short_description' : location.short_description,
+        'long_description' : location.long_description,
         'coordinates' : {
-            'lng' : location.coordinates_lng,
-            'lat' : location.coordinates_lat,
+            'lng' : location.lng_coordinate,
+            'lat' : location.lat_coordinate,
         }
     }
     response_params = {

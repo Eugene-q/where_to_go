@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='location',
-            name='description_long',
+            name='long_description',
             field=tinymce.models.HTMLField(default='Подробное описание'),
         ),
     ]
