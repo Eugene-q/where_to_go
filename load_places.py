@@ -10,7 +10,7 @@ JSON_FOLDER = \
 resp = requests.get(JSON_LIST)
 text = resp.text
 while text:
-    trash, sep, text = text.partition('class="js-navigation-open link-gray-dark" title="')
+    trash, sep, text = text.partition('class="js-navigation-open Link--primary" title="')
     if text:
         file_name, sep, text = text.partition('"')
         json_url = ''.join((JSON_FOLDER, file_name.replace(' ', '%20')))
