@@ -10,20 +10,32 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         place = json.loads(requests.get(options['load_address']).content)
         new_location, created = Location.objects.get_or_create(
-                            title=place['title'],
-                            short_description=place['description_short'],
-                            long_description=place['description_long'],
-                            lng_coordinate=place['coordinates']['lng'],
-                            lat_coordinate=place['coordinates']['lat'],
-                            )
+            title=place['title'],
+            short_description=place['description_short'],
+            long_description=place['description_long'],
+            lng_coordinate=place['coordinates']['lng'],
+            lat_coordinate=place['coordinates']['lat'],
+        )
         if created:
-            self.stdout.write(self.style.SUCCESS('{} created sucsessfully'.format(place['title'])))
+            self.stdout.write(
+                self.style.SUCCESS(
+                    '{place} created sucsessfully'.format(
+                        place=place['title'],
+                    ),
+                ),
+            )
             for img_link in place['imgs']:
                 image_obj = Image.objects.create(location=new_location)
                 image_content = ContentFile(requests.get(img_link).content)
                 folder_url, sep, image_name = img_link.rpartition('/')
-                print('saving', image_name)
+                self.stdout.write('saving', image_name)
                 image_obj.image.save(image_name, image_content, save=True)
         else:
-            self.stdout.write(self.style.ERROR('{} already exists in database!'.format(place['title'])))
-    
+            self.stdout.write(
+                self.style.ERROR(
+                    '{place} already exists in database!'.format(
+                        place=place['title'],
+                    ),
+                ),
+            )
+

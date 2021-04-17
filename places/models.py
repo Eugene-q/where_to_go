@@ -26,7 +26,7 @@ class Image(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, default=0,
                                 related_name='images')
     image = models.ImageField(verbose_name='файл картинки')
-    position = models.PositiveIntegerField(default=0, blank=False, null=False)
+    position = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return '{} - {}'.format(self.title, self.location.title)
