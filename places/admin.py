@@ -11,12 +11,10 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     readonly_fields = ['get_preview',]
     
     def get_preview(self, image):
-        raito = image.image.width / image.image.height
-        return format_html('<img src={url} width={width} height={height} />'.format(
+        return format_html('<img src={url} height={max_height} />',
             url=image.image.url,
-            width=200 * raito,
-            height=200
-        ))
+            max_height=200 if image.image.height > 200 else image.image.height,
+        )
     
     
 @admin.register(Location)

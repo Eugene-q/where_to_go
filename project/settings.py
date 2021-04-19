@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 from environs import Env
 
 env = Env()
@@ -29,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY', default='mw5_z3)(78aezbrdph=a)8gsrvi@+#gk17w7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default='127.0.0.1') 
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default='127.0.0.1')
 
 # Application definition
 
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'places.apps.PlacesConfig',
     'adminsortable2',
-    'tinymce'
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
-    'default': env.dict('DEFAULT_DATABASE', 
-                        default='ENGINE=django.db.backends.sqlite3, NAME=db.sqlite3')
+    'default': {'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': 'db.sqlite3',
+                },
 }
 
 
@@ -121,9 +123,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = env.str('STATIC_URL', default='/static/')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, dir) 
-                            for dir in env.list('STATICFILES_DIRS', default='assets')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, static_dir) for static_dir in
+                    env.list('STATICFILES_DIRS', default='assets')
+                    ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, env.str('MEDIA_ROOT', default='media'))
+
 MEDIA_URL = env.str('MEDIA_URL', default='/media/')

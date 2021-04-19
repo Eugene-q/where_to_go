@@ -1,9 +1,13 @@
-"""a script for quickly uploading test data to the "where to go" project database."""
+"""
+a script for quickly uploading test data 
+to the "where to go" project database.
+"""
 
-import requests
 import subprocess
+import requests
 
-JSON_LIST = 'https://github.com/devmanorg/where-to-go-places/tree/master/places'
+JSON_LIST = \
+    'https://github.com/devmanorg/where-to-go-places/tree/master/places'
 JSON_FOLDER = \
     'https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/'
 
